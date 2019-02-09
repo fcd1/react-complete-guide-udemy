@@ -1,25 +1,68 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Person from './Person/Person'
 
 class App extends Component {
+  state = {
+    persons: [
+      {name: 'Max', age: 28},
+      {name: 'Manu', age: 29},
+      {name: 'Stephanie', age: 26}
+    ],
+    otherState: 'some other value'
+  }
+
+  switchNameHandler = (newName) => {
+    // console.log('Was Clicked');
+    // DON'T DO THIS: this.state.persons[0].name = 'Maxi';
+    this.setState({
+      persons: [
+        {name: newName, age: 28},
+        {name: 'Manu', age: 29},
+        {name: 'Stephanie', age: 27}
+      ]
+    });
+  }
+
+  // event arg will be passed in automatically by React
+  nameChangeHandler = (event) => {
+    this.setState({
+      persons: [
+        {name: 'Max', age: 28},
+        {name: event.target.value, age: 29},
+        {name: 'Stephanie', age: 27}
+      ]
+    });
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>Hi, I'm a React App</h1>
+        { 
+          /* One way to pass argumentss()
+          However, Max said this can be ineffecient: Re-render things too often.
+          He recomments the other way (bind syntax shown below)
+          */
+        }
+        <button onClick={() => this.switchNameHandler('MaxiButton')}>Switch Name</button>
+        <Person 
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age}>
+            <em>Hello</em>
+        </Person>
+        <Person 
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age}
+          // Other way to pass argument(s)
+          click={this.switchNameHandler.bind(this,'MaxiParagraph')}
+          // event arg passed in automatically by React
+          changed={this.nameChangeHandler}>
+          Hobbies: Racing
+        </Person>
+        <Person 
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age}>
+        </Person>
       </div>
     );
   }
