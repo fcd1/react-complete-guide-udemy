@@ -50,6 +50,36 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    // Preferred way of outputing content conditionaly
+    let persons = null;
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+          >
+            <em>Hello</em>
+          </Person>
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            // Other way to pass argument(s)
+            click={this.switchNameHandler.bind(this,'MaxiParagraph')}
+            // event arg passed in automatically by React
+            changed={this.nameChangeHandler}
+          >
+            Hobbies: Racing
+          </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+          >
+          </Person>
+        </div>
+      )
+    }
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App</h1>
@@ -65,37 +95,7 @@ class App extends Component {
         >
           Show Names
         </button>
-        { // Ternary expression
-          // This way can become messy, especially if use nested ternaries
-          // See better way in Sec 4, Lec 51
-          this.state.showPersons
-          ?
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-            >
-              <em>Hello</em>
-            </Person>
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              // Other way to pass argument(s)
-              click={this.switchNameHandler.bind(this,'MaxiParagraph')}
-              // event arg passed in automatically by React
-              changed={this.nameChangeHandler}
-            >
-              Hobbies: Racing
-            </Person>
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-            >
-            </Person>
-          </div>
-          :
-          null
-        }
+        {persons}
       </div>
     );
   }
