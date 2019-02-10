@@ -9,7 +9,8 @@ class App extends Component {
       {name: 'Manu', age: 29},
       {name: 'Stephanie', age: 26}
     ],
-    otherState: 'some other value'
+    otherState: 'some other value',
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -34,6 +35,12 @@ class App extends Component {
       ]
     });
   }
+
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -53,32 +60,42 @@ class App extends Component {
           */
         }
         <button
-          onClick={() => this.switchNameHandler('MaxiButton')}
+          onClick={this.togglePersonsHandler}
           style={style}
         >
-          Switch Name
+          Show Names
         </button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-        >
-          <em>Hello</em>
-        </Person>
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          // Other way to pass argument(s)
-          click={this.switchNameHandler.bind(this,'MaxiParagraph')}
-          // event arg passed in automatically by React
-          changed={this.nameChangeHandler}
-        >
-          Hobbies: Racing
-        </Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        >
-        </Person>
+        { // Ternary expression
+          // This way can become messy, especially if use nested ternaries
+          // See better way in Sec 4, Lec 51
+          this.state.showPersons
+          ?
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+            >
+              <em>Hello</em>
+            </Person>
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              // Other way to pass argument(s)
+              click={this.switchNameHandler.bind(this,'MaxiParagraph')}
+              // event arg passed in automatically by React
+              changed={this.nameChangeHandler}
+            >
+              Hobbies: Racing
+            </Person>
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+            >
+            </Person>
+          </div>
+          :
+          null
+        }
       </div>
     );
   }
