@@ -7,3 +7,9 @@
     text-align: center;
 
 }
+
+@media (min-width: 450px) {
+    .Person {
+        width: 350px;
+    }
+}
