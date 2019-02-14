@@ -25,7 +25,8 @@ class App extends Component {
     return state;
   }
 
-  // Rarely used, may be removed in the future
+  // Legacy method, rarely used, may be removed in the future
+  // Generates warning, mentions getDerivedStateFFromProps being used
   componentWillMount() {
     console.log('[App.js] componentWillMount');
   }
