@@ -5,6 +5,11 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js constructor');
+  }
+
   state = {
     persons: [
       { id: 1, name: 'Max', age: 28},
@@ -13,6 +18,20 @@ class App extends Component {
     ],
     otherState: 'some other value',
     showPersons: false
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  // Rarely used, may be removed in the future
+  componentWillMount() {
+    console.log('[App.js] componentWillMount');
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
   }
 
   // event arg will be passed in automatically by React
@@ -63,6 +82,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] render');
     // Preferred way of outputing content conditionaly
     let persons = null;
     if (this.state.showPersons) {
