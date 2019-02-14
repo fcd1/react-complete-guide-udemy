@@ -27,12 +27,23 @@ class App extends Component {
 
   // Legacy method, rarely used, may be removed in the future
   // Generates warning, mentions getDerivedStateFFromProps being used
+  /*
   componentWillMount() {
     console.log('[App.js] componentWillMount');
   }
+  */
 
   componentDidMount() {
     console.log('[App.js] componentDidMount');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate');
   }
 
   // event arg will be passed in automatically by React
