@@ -6,13 +6,34 @@ import Aux from '../../../hoc/Aux';
 import withClass from '../../../hoc/withClass';
 
 class Person extends Component {
+    constructor(props) {
+        super(props)
+        // This is the more modern approach
+        this.inputElementRef = React.createRef();
+    }
+
+    componentDidMount() {
+        // First way Max did it
+        // this.inputElement.focus();
+        // second way
+        this.inputElementRef.current.focus();
+    }
+
     render () {
         console.log('[Person.js] rendering', this.props);
         return (
             <Aux>
                 <p key="1" onClick={this.props.click}>I'm {this.props.name} and I am {this.props.age} years old</p>,
                 <p key="2">{this.props.children}</p>,
-                <input key="3" type="text" onChange={this.props.changed} value={this.props.name} />
+                <input
+                    key="3"
+                    // First way Max did it. Older approach
+                    // ref={(inputEl) => {this.inputElement = inputEl}}
+                    // second way
+                    ref={this.inputElementRef}
+                    type="text"
+                    onChange={this.props.changed}
+                    value={this.props.name} />
             </Aux>
         );
     };
