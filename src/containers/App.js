@@ -14,6 +14,8 @@ class App extends Component {
 
   state = {
     persons: [
+      // Do the following to trigger the warning from PropTypes
+      // { id: 1, name: 'Max', age: '28'},
       { id: 1, name: 'Max', age: 28},
       { id: 2, name: 'Manu', age: 29},
       { id: 3, name: 'Stephanie', age: 26}
